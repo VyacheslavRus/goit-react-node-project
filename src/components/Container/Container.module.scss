@@ -7,14 +7,11 @@
   padding-right: 20px;
 
   @include for-size(mobile-only) {
-    width: 300px;
-    padding-left: 0;
-    padding-right: 0;
-       
+    width: 320px;
   }
 
   @include for-size(tablet) {
-    width: 705px;
+    width: 698px;
   }
 
   @include for-size(desktop) {

@@ -16,7 +16,7 @@ const expenseGetRequest = createAction('transactions/expenseGetRequest');
 const expenseGetSuccess = createAction('transactions/expenseGetSuccess');
 const expenseGetError = createAction('transactions/expenseGetError');
 
-// eslint-disable-next-line import/no-anonymous-default-export
+// eslint-disable-next-line
 export default {
   incomeGetRequest,
   incomeGetSuccess,

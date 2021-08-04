@@ -5,7 +5,7 @@ const periodDataGetSuccess = createAction('transactions/periodDataGetSuccess');
 const periodDataGetError = createAction('transactions/periodDataGetError');
 const periodDataClear=createAction('periodData/ getClear');
 
-// eslint-disable-next-line import/no-anonymous-default-export
+// eslint-disable-next-line
 export default {
   periodDataGetRequest,
   periodDataGetSuccess,
