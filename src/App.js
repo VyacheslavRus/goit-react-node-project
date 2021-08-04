@@ -23,7 +23,7 @@ const StatisticsView = lazy(() =>
 export default function App() {
   return (
     <>
-      <div>
+      <div className="main-bg-auth">
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <PublicRoute path={routes.auth} restricted redirectTo={routes.home}>
