@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Switch } from 'react-router-dom';
+import Header from './components/Header/Header';
 import { routes, PublicRoute, PrivateRoute } from './routes';
 
 const AuthorizationView = lazy(() =>
@@ -23,6 +24,7 @@ const StatisticsView = lazy(() =>
 export default function App() {
   return (
     <>
+    <Header/>
       <div className="main-bg-auth">
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
