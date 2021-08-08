@@ -1,0 +1,113 @@
+@import '../../styles/_mixins.scss';
+@import '../../styles/_variables.scss';
+
+.balanceWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  order: 2;
+  color: $primary-text-color;
+  text-align: center;
+  margin-right: auto;
+  width: 100%;
+
+  @include for-size(tablet) {
+    display: block;
+    order: 1;
+  }
+}
+
+.balanceForm {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  // border: 1px solid blue;
+}
+
+.balanceLabel {
+  display: block;
+  min-height: 20px;
+  margin-bottom: 6px;
+  color: inherit;
+  margin-top: 10px;
+  cursor: pointer;
+
+  @include for-size(mobile-only) {
+    width: 180px;
+  }
+
+  @include for-size(tablet) {
+    display: flex;
+    align-items: center;
+    margin: 0 21px 0 0;
+    height: 44px;
+  }
+}
+
+.balanceInput,
+.balanceButton {
+  width: 125px;
+  min-height: 44px;
+  border: 2px solid #ffffff;
+  background-color: transparent;
+  margin: 0;
+  padding: 13px 17px;
+}
+
+.balanceInput {
+  color: black;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 22px 0 0 22px;
+
+  &::placeholder {
+    color: inherit;
+  }
+
+  @include for-size(tablet) {
+    margin-right: 15px;
+    border-radius: 16px;
+  }
+}
+
+.balanceButton {
+  color: inherit;
+  border-radius: 0 22px 22px 0;
+  transition: ease 0.3s;
+
+  &:hover,
+  &:focus {
+    background-color: $primary-orange-color;
+    border-color: $primary-orange-color;
+    color: white;
+  }
+
+  @include for-size(tablet) {
+    border-radius: 16px;
+  }
+}
+
+.input,
+.balanceButton {
+  width: 125px;
+  min-height: 44px;
+  border: 2px solid #ffffff;
+  background-color: transparent;
+  margin: 0;
+  padding: 13px 17px;
+}
+
+.input {
+  color: black;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 22px;
+  &::placeholder {
+    color: inherit;
+  }
+  @include for-size(tablet) {
+    margin-right: 15px;
+    border-radius: 16px;
+  }
+}

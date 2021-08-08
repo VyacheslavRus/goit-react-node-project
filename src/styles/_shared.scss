@@ -1,7 +1,28 @@
+@import './mixins';
+@import './variables';
+
 body {
   font-family: Roboto, serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 1.17;
   letter-spacing: 0.02em;
+}
+
+.main-top {
+  @include for-size(mobile-only) {
+    height: 290px;
+    background: $primary-gray-color;
+    border-bottom-left-radius: 150px;
+  }
+  @include for-size(tablet) {
+    height: 526px;
+    background: $primary-gray-color;
+    border-bottom-left-radius: 120px;
+  }
+  @include for-size(desktop) {
+    height: 526px;
+    background: $primary-gray-color;
+    border-bottom-left-radius: 120px;
+  }
 }
