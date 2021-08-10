@@ -8,7 +8,8 @@ body {
   line-height: 1.17;
   letter-spacing: 0.02em;
 }
-.main-bg-auth {
+
+.main-top, .main-bg-auth {
   @include for-size(mobile-only) {
     height: 286px;
     background: $primary-gray-color url(../img/mob-top.svg);
@@ -38,20 +39,20 @@ body {
     background-size: contain;
   }
 }
-.main-bg {
-  @include for-size(mobile-only) {
-    height: 290px;
-    background: $primary-gray-color;
-    border-bottom-left-radius: 150px;
-  }
-  @include for-size(tablet) {
-    height: 526px;
-    background: $primary-gray-color;
-    border-bottom-left-radius: 120px;
-  }
-  @include for-size(desktop) {
-    height: 526px;
-    background: $primary-gray-color;
-    border-bottom-left-radius: 120px;
-  }
-}
+// .main-bg {
+//   @include for-size(mobile-only) {
+//     height: 290px;
+//     background: $primary-gray-color;
+//     border-bottom-left-radius: 150px;
+//   }
+//   @include for-size(tablet) {
+//     height: 526px;
+//     background: $primary-gray-color;
+//     border-bottom-left-radius: 120px;
+//   }
+//   @include for-size(desktop) {
+//     height: 526px;
+//     background: $primary-gray-color;
+//     border-bottom-left-radius: 120px;
+//   }
+// }
