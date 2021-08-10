@@ -1,7 +1,12 @@
-import React, { Suspense, lazy } from 'react';
-import { Switch } from 'react-router-dom';
+import React, { Suspense, lazy,useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Switch, useLocation } from 'react-router-dom';
+import { useBreakpoint } from 'react-use-size';
 import Header from './components/Header/Header';
 import { routes, PublicRoute, PrivateRoute } from './routes';
+import * as authSelectors from './redux/selectors/authSelectors';
+import authOperations from './redux/operations/authOperations';
+import authActions from './redux/actions/authActions';
 
 const AuthorizationView = lazy(() =>
   import(
@@ -22,6 +27,35 @@ const StatisticsView = lazy(() =>
 );
 
 export default function App() {
+
+
+  const userEmail = useSelector(authSelectors.getUserEmail);
+  const token = useSelector(authSelectors.getToken);
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  const width = useBreakpoint(768);
+
+  useEffect(() => {
+    // При логинизации через Google в момент маунта App (componentDidMount) в адресной строке есть токен пользователя.
+    // 1. Вытаскиваем токен пользователя из адресной строки и записываем его в переменную googleUserToken.
+    const googleUserToken = new URLSearchParams(location.search).get(
+      'accessToken',
+    );
+
+    // 2. Если googleUserToken есть, то записываем его в наш Redux Store в свойсво token.
+    googleUserToken && dispatch(authActions.setGoogleToken(googleUserToken));
+
+    // 3. Если токен есть, а почты пользователя (user.email) нет, то делаем запрос на бекенд на получение текущего пользователя.
+    // Проверка на токен и почту нужна, что б не делать лишние запросы на бекенд уже после логина пользователя.
+    if (token && !userEmail) {
+      dispatch(authOperations.getCurrentUser());
+    }
+    //* Комментарии не удаляйте, на будущее будет полезно что б понимать, что тут происходит.
+  }, [dispatch, location, token, userEmail]);
+
+  let x = location.pathname === '/authorization';
+  let y = x ? 'main-top-auth' : 'main-top';
   return (
     <>
     <Header/>

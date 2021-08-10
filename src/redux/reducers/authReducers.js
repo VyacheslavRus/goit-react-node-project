@@ -7,7 +7,7 @@ import actionDelete from '../actions/transactionDeleteActions';
 
 const userInitialState = {};
 const user = createReducer(userInitialState, {
-  [authActions.logInSuccess]: (_, { payload }) => payload.userData,
+  [authActions.logInSuccess]: (_, { payload }) => payload.user,
   [authActions.logOutSuccess]: () => userInitialState,
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload,
   [balanceActions.addBalanceSuccess]: (state, { payload }) => ({
