@@ -9,7 +9,7 @@ import transactionsOperations from '../../redux/operations/transactionsOperation
 import categoriesOperations from '../../redux/operations/categoriesOperations';
 import BalanceForm from '../../components/BalanceForm/BalanceForm';
 import Balance from '../../components/Balance/Balance';
-// import GoToReport from '../../components/GoToReport/GoToReport';
+import GoToReport from '../../components/GoToReport/GoToReport';
 import { getCategoryExpense } from '../../redux/selectors/categoriesSelectors';
 import operation from '../../redux/selectors/transactionsSelectors';
 import { handleDeleteExpence } from '../../redux/operations/transactionsDeleteOperations';
@@ -41,7 +41,7 @@ export default function ExpenseView() {
         {width > 767 && (
           <div className={style.balanceWrap}>
             <Balance />
-            {/* <GoToReport /> */}
+            <GoToReport />
           </div>
         )}
 
