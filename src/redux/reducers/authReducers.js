@@ -4,10 +4,12 @@ import authActions from '../actions/authActions';
 import balanceActions from '../actions/balanceActions';
 import transactionsActions from '../actions/transactionsActions';
 import actionDelete from '../actions/transactionDeleteActions';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const userInitialState = {};
 const user = createReducer(userInitialState, {
-  [authActions.logInSuccess]: (_, { payload }) => payload.user,
+  [authActions.logInSuccess]: (_, { payload: {user:{token, ...rest}}}) => rest,
   [authActions.logOutSuccess]: () => userInitialState,
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload,
   [balanceActions.addBalanceSuccess]: (state, { payload }) => ({
@@ -43,7 +45,7 @@ const user = createReducer(userInitialState, {
 
 const tokenInitialState = null;
 const token = createReducer(tokenInitialState, {
-  [authActions.logInSuccess]: (_, { payload }) => payload.accessToken,
+  [authActions.logInSuccess]: (_, { payload }) => payload.user.token,
   [authActions.logOutSuccess]: () => tokenInitialState,
   [authActions.setGoogleToken]: (_, { payload }) => payload,
 });
@@ -62,8 +64,14 @@ const isAuthenticated = createReducer(false, {
   [actionDelete.transactionExpenceDeleteError]: () => false,
 });
 
+const userPersistConfig = {
+  key: 'user',
+  storage,
+  whitelist: ['email'],
+}
+
 export default combineReducers({
-  user,
+  user: persistReducer( userPersistConfig, user),
   isAuthenticated,
   token,
 });

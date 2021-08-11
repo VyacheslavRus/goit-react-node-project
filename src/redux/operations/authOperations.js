@@ -8,7 +8,9 @@ const handleLogIn = credentials => dispatch => {
     .logIn(credentials)
     .then(({ data }) => {
       // data = { accessToken, refreshToken, sid, userData: { balance, email, id, transactions } }
-      api.token.set(data.accessToken);
+      // data = { accessToken, refreshToken, sid, userData: { balance, email, id, transactions } }
+      console.log(data)
+      api.token.set(data.user.token);
       dispatch(authActions.logInSuccess(data));
     })
     .catch(error => dispatch(authActions.logInError(error.message)));
