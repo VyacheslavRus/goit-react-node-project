@@ -33,7 +33,7 @@ const periodDataGet = date =>
   axios.get(`/transaction/period-data?date=${date}`);
 
 /* USER */
-const balancePatch = balance => axios.post('/user/balance', balance);
+const balancePost = balance => axios.post('/user/balance', balance);
 const userDataGet = () => axios.get('/user');
 // eslint-disable-next-line
 export default {
@@ -51,6 +51,6 @@ export default {
   incomeCategoriesGet,
   expenseCategoriesGet,
   periodDataGet,
-  balancePatch,
+  balancePost,
   userDataGet,
 };
