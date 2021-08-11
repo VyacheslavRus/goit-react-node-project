@@ -8,7 +8,7 @@ import TransactionTable from '../../components/TransactionTable/TransactionTable
 import transactionsOperations from '../../redux/operations/transactionsOperations';
 import categoriesOperations from '../../redux/operations/categoriesOperations';
 import BalanceForm from '../../components/BalanceForm/BalanceForm';
-// import BalanceCustom from '../../components/BalanceCustom/BalanceCustom';
+import Balance from '../../components/Balance/Balance';
 // import GoToReport from '../../components/GoToReport/GoToReport';
 import { getCategoryExpense } from '../../redux/selectors/categoriesSelectors';
 import operation from '../../redux/selectors/transactionsSelectors';
@@ -40,7 +40,7 @@ export default function ExpenseView() {
       <Container>
         {width > 767 && (
           <div className={style.balanceWrap}>
-            {/* <BalanceCustom /> */}
+            <Balance />
             {/* <GoToReport /> */}
           </div>
         )}
@@ -53,9 +53,9 @@ export default function ExpenseView() {
           <div className={style.wrapper}>
             {width > 767 && (
               <TransactionTable
-                // costList={costList}
-                // fnRemove={handleDeleteExpence}
-                // styleOption={true}
+              // costList={costList}
+              // fnRemove={handleDeleteExpence}
+              // styleOption={true}
               />
             )}
             {/* {width > 767 && <Summary />} */}
