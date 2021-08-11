@@ -7,9 +7,9 @@ const handleLogIn = credentials => dispatch => {
   api
     .logIn(credentials)
     .then(({ data }) => {
-      // data = { accessToken, refreshToken, sid, userData: { balance, email, id, transactions } }
-      api.token.set(data.accessToken);
-      dispatch(authActions.logInSuccess(data));
+      // data = { message, user: { email, token, type } }
+      api.token.set(data.user.token);
+      dispatch(authActions.logInSuccess(data.user));
     })
     .catch(error => dispatch(authActions.logInError(error.message)));
 };
