@@ -1,4 +1,4 @@
-import React, { Suspense, lazy,useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, useLocation } from 'react-router-dom';
 import { useBreakpoint } from 'react-use-size';
@@ -27,14 +27,14 @@ const StatisticsView = lazy(() =>
 );
 
 export default function App() {
-
-
   const userEmail = useSelector(authSelectors.getUserEmail);
   const token = useSelector(authSelectors.getToken);
   const dispatch = useDispatch();
   const location = useLocation();
 
   const width = useBreakpoint(768);
+
+  console.log(token);
 
   useEffect(() => {
     // При логинизации через Google в момент маунта App (componentDidMount) в адресной строке есть токен пользователя.
@@ -58,8 +58,8 @@ export default function App() {
   let y = x ? 'main-bg-auth' : 'main-bg';
   return (
     <>
-    <Header/>
-      <div className={"main-bg-auth"}>
+      <Header />
+      <div className={y}>
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <PublicRoute path={routes.auth} restricted redirectTo={routes.home}>
