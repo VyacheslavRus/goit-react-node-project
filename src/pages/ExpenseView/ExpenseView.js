@@ -11,7 +11,7 @@ import BalanceForm from '../../components/BalanceForm/BalanceForm';
 // import BalanceCustom from '../../components/BalanceCustom/BalanceCustom';
 // import GoToReport from '../../components/GoToReport/GoToReport';
 import { getCategoryExpense } from '../../redux/selectors/categoriesSelectors';
-import operation from '../../redux/selectors/transactionsSelectors';
+import selectors from '../../redux/selectors/transactionsSelectors';
 import { handleDeleteExpence } from '../../redux/operations/transactionsDeleteOperations';
 import style from './ExpenseView.module.scss';
 
@@ -19,20 +19,39 @@ export default function ExpenseView() {
   const dispatch = useDispatch();
   const { width } = useWindowSize();
 
-  const costList = useSelector(operation.getExpenseTransaction);
+  const costList = useSelector(selectors.getExpenseTransaction);
   const category = useSelector(getCategoryExpense);
 
-  // useEffect(() => {
-  //   if (costList && category) {
-  //     return;
-  //   }
-  //   dispatch(transactionsOperations.handleExpenseGet());
-  //   dispatch(categoriesOperations.handleExpenseCategGet());
-  // }, [dispatch, costList, category]);
+  const getPeriod = () => {
+    const today = new Date(Date.now());
+    let month = today.getMonth() + 1;
+    month = month < 10 ? `0${month}` : `${month}`;
+    const year = today.getFullYear();
+    const period = `${month}.${year}`;
+    return period;
+  };
+
+  // componenentDidMount
+  useEffect(() => {
+    dispatch(transactionsOperations.handleExpenseGet(getPeriod()));
+    dispatch(categoriesOperations.handleExpenseCategGet());
+  }, [dispatch]);
+
+  // componentDidUpdate
+  useEffect(() => {
+    if (costList) return;
+
+    dispatch(transactionsOperations.handleExpenseGet(getPeriod()));
+  }, [dispatch, costList]);
+
+  useEffect(() => {
+    if (category) return;
+
+    dispatch(categoriesOperations.handleExpenseCategGet());
+  }, [dispatch, category]);
 
   const submitIncomeData = data => {
-    const finalData = { ...data, amount: Number(data.amount) };
-    dispatch(transactionsOperations.handleExpensePost(finalData));
+    dispatch(transactionsOperations.handleExpensePost(data));
   };
 
   return (
@@ -53,9 +72,9 @@ export default function ExpenseView() {
           <div className={style.wrapper}>
             {width > 767 && (
               <TransactionTable
-                // costList={costList}
-                // fnRemove={handleDeleteExpence}
-                // styleOption={true}
+                costList={costList}
+                fnRemove={handleDeleteExpence}
+                styleOption={true}
               />
             )}
             {/* {width > 767 && <Summary />} */}

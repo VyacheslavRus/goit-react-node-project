@@ -2,7 +2,7 @@ const variables = {
   date: 'date',
   category: 'category',
   description: 'description',
-  amount: 'amount',
+  sum: 'sum',
 };
 
 export default variables;

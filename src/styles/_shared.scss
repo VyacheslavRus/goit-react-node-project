@@ -39,20 +39,20 @@ body {
     background-size: contain;
   }
 }
-// .main-bg {
-//   @include for-size(mobile-only) {
-//     height: 290px;
-//     background: $primary-gray-color;
-//     border-bottom-left-radius: 150px;
-//   }
-//   @include for-size(tablet) {
-//     height: 526px;
-//     background: $primary-gray-color;
-//     border-bottom-left-radius: 120px;
-//   }
-//   @include for-size(desktop) {
-//     height: 526px;
-//     background: $primary-gray-color;
-//     border-bottom-left-radius: 120px;
-//   }
-// }
+.main-bg {
+  @include for-size(mobile-only) {
+    height: 290px;
+    background: $primary-gray-color;
+    border-bottom-left-radius: 150px;
+  }
+  @include for-size(tablet) {
+    height: 526px;
+    background: $primary-gray-color;
+    border-bottom-left-radius: 120px;
+  }
+  @include for-size(desktop) {
+    height: 526px;
+    background: $primary-gray-color;
+    border-bottom-left-radius: 120px;
+  }
+}

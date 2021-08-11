@@ -53,7 +53,7 @@ const getCurrentUser = () => (dispatch, getState) => {
     api
       .userDataGet()
       .then(({ data }) => {
-        // data = { balance, email, transactions }
+        // data = { balance, email, type }
         dispatch(authActions.getCurrentUserSuccess(data));
       })
       .catch(error => dispatch(authActions.getCurrentUserError(error.message)));

@@ -9,16 +9,21 @@ import BackHomeButton from '../BackHomeButton/BackHomeButton';
 import Select from './Select/Select';
 import variables from './variables';
 import 'react-calendar/dist/Calendar.css';
+import { withRouter } from 'react-router-dom';
 
-const BalanceForm = ({ category, submitIncomeData, size }) => {
-  // const options = category.map(el => ({ value: el, label: el }));
+const BalanceForm = ({ category, submitIncomeData, size, match }) => {
+  const options = category.map(el => ({
+    value: el,
+    label: `${el[0].toUpperCase() + el.slice(1)}`,
+  }));
 
   const [date, setDate] = useState('');
   const [value, setValue] = useState(null);
 
   const initialForm = {
+    type: match.path.slice(1),
     description: '',
-    amount: '',
+    sum: '',
     date: date,
     category: '',
   };
@@ -62,7 +67,15 @@ const BalanceForm = ({ category, submitIncomeData, size }) => {
 
   const handleSubmitForm = e => {
     e.preventDefault();
-    submitIncomeData(form);
+
+    const correctForm = {
+      ...form,
+      sum: parseFloat(form.sum),
+      date: form.date.split('-').reverse().join('.'),
+      category: form.category.toLowerCase(),
+    };
+
+    submitIncomeData(correctForm);
     clearForm();
   };
 
@@ -81,10 +94,10 @@ const BalanceForm = ({ category, submitIncomeData, size }) => {
             <label className={style.label}>
               <input
                 className={style.input}
-                type='text'
-                placeholder='Описание товара'
+                type="text"
+                placeholder="Описание товара"
                 value={form.description}
-                maxLength='20'
+                maxLength="20"
                 name={variables.description}
                 onChange={handleFormValue}
                 required
@@ -93,7 +106,7 @@ const BalanceForm = ({ category, submitIncomeData, size }) => {
             <label className={style.labelSelect}>
               <Select
                 required
-                // options={options}
+                options={options}
                 styles={customStyles}
                 placeholder={'Категория товара'}
                 value={value}
@@ -109,17 +122,17 @@ const BalanceForm = ({ category, submitIncomeData, size }) => {
                 <label className={style.labelNumberTD}>
                   <input
                     className={style.inputNumberTD}
-                    type='text'
-                    placeholder='00,00'
-                    value={form.amount}
-                    name={variables.amount}
+                    type="text"
+                    placeholder="00,00"
+                    value={form.sum}
+                    name={variables.sum}
                     onChange={handleNumberValue}
-                    maxLength='6'
+                    maxLength="6"
                     required
                   />
                 </label>
                 <div className={style.svgContainerTD}>
-                  <svg width='20' height='20' className={style.svg}>
+                  <svg width="20" height="20" className={style.svg}>
                     <use href={sprite + '#icon-calculator'}></use>
                   </svg>
                 </div>
@@ -131,17 +144,17 @@ const BalanceForm = ({ category, submitIncomeData, size }) => {
               <label className={style.labelNumber}>
                 <input
                   className={style.inputNumber}
-                  type='text'
-                  placeholder='00.00 UAH'
-                  name={variables.amount}
-                  value={form.amount}
-                  maxLength='6'
+                  type="text"
+                  placeholder="00.00 UAH"
+                  name={variables.sum}
+                  value={form.sum}
+                  maxLength="6"
                   onChange={handleNumberValue}
                   required
                 />
               </label>
               <div className={style.svgContainer}>
-                <svg width='20' height='20' className={style.svg}>
+                <svg width="20" height="20" className={style.svg}>
                   <use href={sprite + '#icon-calculator'}></use>
                 </svg>
               </div>
@@ -149,12 +162,12 @@ const BalanceForm = ({ category, submitIncomeData, size }) => {
           )}
         </div>
         <div className={style.buttonContainer}>
-          <button type='submit' className={style.buttonSubmit}>
+          <button type="submit" className={style.buttonSubmit}>
             Ввод
           </button>
           <button
             onClick={clearForm}
-            type='button'
+            type="button"
             className={style.buttonClear}
           >
             Очистить
@@ -171,4 +184,4 @@ BalanceForm.propTypes = {
   size: PropTypes.object.isRequired,
 };
 
-export default withSize({ monitorWidth: true })(BalanceForm);
+export default withRouter(withSize({ monitorWidth: true })(BalanceForm));
