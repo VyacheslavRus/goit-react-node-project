@@ -7,7 +7,10 @@ import actionDelete from '../actions/transactionDeleteActions';
 
 const userInitialState = {};
 const user = createReducer(userInitialState, {
-  [authActions.logInSuccess]: (_, { payload }) => payload.user,
+  [authActions.logInSuccess]: (_, { payload }) => ({
+    email: payload.email,
+    type: payload.type,
+  }),
   [authActions.logOutSuccess]: () => userInitialState,
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload,
   [balanceActions.addBalanceSuccess]: (state, { payload }) => ({
@@ -43,7 +46,7 @@ const user = createReducer(userInitialState, {
 
 const tokenInitialState = null;
 const token = createReducer(tokenInitialState, {
-  [authActions.logInSuccess]: (_, { payload }) => payload.accessToken,
+  [authActions.logInSuccess]: (_, { payload }) => payload.token,
   [authActions.logOutSuccess]: () => tokenInitialState,
   [authActions.setGoogleToken]: (_, { payload }) => payload,
 });

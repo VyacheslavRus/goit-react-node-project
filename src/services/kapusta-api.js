@@ -1,5 +1,3 @@
-// ! ПОКА В РАЗРАБОТКЕ, БУДЕТ РАБОТАТЬ КОГДА ДОДЕЛАЕМ БЕКЕНД!!!
-
 import axios from 'axios';
 
 /* DEFAULTS SETTINGS */
@@ -19,8 +17,8 @@ const token = {
 const signUp = credentials => axios.post('/auth/signup', credentials);
 const logIn = credentials => axios.post('/auth/signin', credentials);
 const logOut = () => axios.post('/auth/signout');
-const refreshToken = sid => axios.post('/auth/refresh', sid);
-const googleAuth = () => axios.get('/auth/google');
+// const refreshToken = sid => axios.post('/auth/refresh', sid);
+// const googleAuth = () => axios.get('/auth/google');
 
 /* TRANSACTIONS */
 const incomePost = data => axios.post('/transaction/income', data);
@@ -43,8 +41,8 @@ export default {
   signUp,
   logIn,
   logOut,
-  refreshToken,
-  googleAuth,
+  // refreshToken,
+  // googleAuth,
   incomePost,
   incomeGet,
   expensePost,
