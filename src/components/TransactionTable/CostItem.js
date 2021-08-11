@@ -15,21 +15,14 @@ function CostItem({ desc, amount, date, category, id, fnRemove, styleOption }) {
     setStatus(false);
   };
 
-  // --------------------------------> Преобразование даты в формат 00.00.000 из 0000-00-00
-  const parseDate = new Date(date);
-  const day = parseDate.getDate().toString().padStart(2, '0');
-  const monthNumber = parseDate.getMonth();
-  const month = monthNumber + 1;
-  const montStringh = month.toString().padStart(2, '0');
-  const year = parseDate.getFullYear().toString();
-  const newDate = `${day}.${montStringh}.${year}`;
-
   return (
     <div className={status ? style.table__body : style.table__body_delete}>
       <ul className={style.table__box}>
-        <li className={style.table__text}>{newDate}</li>
+        <li className={style.table__text}>{date}</li>
         <li className={style.table__text}>{desc}</li>
-        <li className={style.table__text}>{category}</li>
+        <li
+          className={style.table__text}
+        >{`${category[0].toUpperCase()}${category.slice(1)}`}</li>
         <li className={style.table__text}>
           {/* -----------------------Desctop-Tablet------------------------------- */}
           {styleOption && width > 767 && (

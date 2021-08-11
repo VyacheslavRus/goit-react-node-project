@@ -41,7 +41,7 @@ const handleDeleteExpence = id => dispatch => {
   api
     .transactionDelete(id)
     .then(({ data }) => {
-      console.log(id);
+
       dispatch(
         actions.transactionExpenceDeleteSuccess({
           id: id,

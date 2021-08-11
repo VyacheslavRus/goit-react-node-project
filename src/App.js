@@ -55,11 +55,11 @@ export default function App() {
   }, [dispatch, location, token, userEmail]);
 
   let x = location.pathname === '/authorization';
-  let y = x ? 'main-top-auth' : 'main-top';
+  let y = x ? 'main-bg-auth' : 'main-bg';
   return (
     <>
     <Header/>
-      <div className="main-bg-auth">
+      <div className={"main-bg-auth"}>
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <PublicRoute path={routes.auth} restricted redirectTo={routes.home}>
