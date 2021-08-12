@@ -38,8 +38,8 @@ const transactionDelete = transactionId =>
 const incomeCategoriesGet = () => axios.get('/categories/income');
 const expenseCategoriesGet = () => axios.get('/categories/expense');
 
-const periodDataGet = date =>
-  axios.get(`/transaction/period-data?date=${date}`);
+// const periodDataGet = date =>
+//   axios.get(`/transaction/period-data?date=${date}`);
 
 /* USER */
 const balancePost = balance => axios.post('/user/balance', balance);
@@ -62,7 +62,7 @@ export default {
   transactionDelete,
   incomeCategoriesGet,
   expenseCategoriesGet,
-  periodDataGet,
+  // periodDataGet,
   balancePost,
   userDataGet,
 };
