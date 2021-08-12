@@ -10,21 +10,26 @@ import operation from '../../redux/selectors/transactionsSelectors';
 import { handleDelete } from '../../redux/operations/transactionsDeleteOperations';
 import style from './HomeView.module.scss';
 import routes from '../../routes/routes';
+import Balance from '../../components/Balance/Balance';
 
 const HomeView = () => {
   const costList = useSelector(operation.getAllransactions);
   const { width } = useWindowSize();
   return (
     <>
-       {width > 767 && <Redirect to={routes.expense} />}
+      {width > 767 && <Redirect to={routes.expense} />}
       <main className={style.main}>
-      <Container>
-        <TransactionContainer>
+        <Container>
+          <div className={style.balanceWrap}>
+            <Balance />
+            {/* <Reports /> */}
+          </div>
+          <TransactionContainer>
             <TransactionTable costList={costList} fnRemove={handleDelete} />
           </TransactionContainer>
-      </Container>
-        </main>
-      </>
+        </Container>
+      </main>
+    </>
   );
 };
 

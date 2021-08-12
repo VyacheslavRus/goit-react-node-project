@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Balance from '../../components/Balance/Balance';
 import BtnBack from '../../components/BtnBack/BtnBack';
 import Container from '../../components/Container';
 import FinanceTotal from '../../components/FinanceTotal/FinanceTotal';
@@ -17,6 +18,7 @@ const StatisticsView = () => {
         <div className={style.barWrapper}>
           <BtnBack />
           <div className={style.balanceWrap}>
+            <Balance />
             <ReportsBalance />
             <MonthCalendar />
           </div>
