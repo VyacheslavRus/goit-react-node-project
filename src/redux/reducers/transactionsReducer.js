@@ -4,7 +4,7 @@ import actions from '../actions/transactionsActions';
 import actionAuth from '../actions/authActions';
 import actionDelete from '../actions/transactionDeleteActions';
 
-const initialState = {};
+const initialState = [];
 
 const incomes = createReducer(initialState, {
   [actions.incomeGetSuccess]: (_, { payload }) => payload,

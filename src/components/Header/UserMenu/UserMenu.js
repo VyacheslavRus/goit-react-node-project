@@ -16,7 +16,7 @@ const UserMenu = () => {
   const [showModal, setShowModal] = useState(false);
   const email = useSelector(state => getUserEmail(state));
   const mobile = useBreakpoint(768);
-  console.log(email)
+
   const toggleModal = () => setShowModal(!showModal);
 
   return (

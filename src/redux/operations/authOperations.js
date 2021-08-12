@@ -7,11 +7,9 @@ const handleLogIn = credentials => dispatch => {
   api
     .logIn(credentials)
     .then(({ data }) => {
-      // data = { accessToken, refreshToken, sid, userData: { balance, email, id, transactions } }
-      // data = { accessToken, refreshToken, sid, userData: { balance, email, id, transactions } }
-      console.log(data)
+      // data = { message, user: { email, token, type } }
       api.token.set(data.user.token);
-      dispatch(authActions.logInSuccess(data));
+      dispatch(authActions.logInSuccess(data.user));
     })
     .catch(error => dispatch(authActions.logInError(error.message)));
 };
@@ -55,7 +53,7 @@ const getCurrentUser = () => (dispatch, getState) => {
     api
       .userDataGet()
       .then(({ data }) => {
-        // data = { balance, email, transactions }
+        // data = { balance, email, type }
         dispatch(authActions.getCurrentUserSuccess(data));
       })
       .catch(error => dispatch(authActions.getCurrentUserError(error.message)));

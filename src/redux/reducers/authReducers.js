@@ -9,7 +9,11 @@ import storage from 'redux-persist/lib/storage';
 
 const userInitialState = {};
 const user = createReducer(userInitialState, {
-  [authActions.logInSuccess]: (_, { payload: {user:{token, ...rest}}}) => rest,
+  [authActions.logInSuccess]: (_, { payload }) => ({
+    email: payload.email,
+    type: payload.type,
+    balance: payload.balance,
+  }),
   [authActions.logOutSuccess]: () => userInitialState,
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload,
   [balanceActions.addBalanceSuccess]: (state, { payload }) => ({
@@ -45,7 +49,7 @@ const user = createReducer(userInitialState, {
 
 const tokenInitialState = null;
 const token = createReducer(tokenInitialState, {
-  [authActions.logInSuccess]: (_, { payload }) => payload.user.token,
+  [authActions.logInSuccess]: (_, { payload }) => payload.token,
   [authActions.logOutSuccess]: () => tokenInitialState,
   [authActions.setGoogleToken]: (_, { payload }) => payload,
 });

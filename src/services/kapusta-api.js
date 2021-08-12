@@ -1,5 +1,3 @@
-// ! ПОКА В РАЗРАБОТКЕ, БУДЕТ РАБОТАТЬ КОГДА ДОДЕЛАЕМ БЕКЕНД!!!
-
 import axios from 'axios';
 
 /* DEFAULTS SETTINGS */
@@ -19,18 +17,27 @@ const token = {
 const signUp = credentials => axios.post('/auth/signup', credentials);
 const logIn = credentials => axios.post('/auth/signin', credentials);
 const logOut = () => axios.post('/auth/signout');
-const refreshToken = sid => axios.post('/auth/refresh', sid);
-const googleAuth = () => axios.get('/auth/google');
+// const refreshToken = sid => axios.post('/auth/refresh', sid);
+// const googleAuth = () => axios.get('/auth/google');
 
 /* TRANSACTIONS */
-const incomePost = data => axios.post('/transaction/income', data);
-const incomeGet = () => axios.get('/transaction/income');
-const expensePost = data => axios.post('/transaction/expense', data);
-const expenseGet = () => axios.get('/transaction/expense');
+const transactionPost = credentials => axios.post('/transactions', credentials);
+// const incomePost = data => axios.post('/transaction/income', data);
+// const expensePost = data => axios.post('/transaction/expense', data);
+
+const incomeGet = () => axios.get(`/transactions/income`);
+const expenseGet = () => axios.get(`/transactions/expense`);
+const incomeForPeriodGet = period =>
+  axios.get(`/transactions/income/${period}`);
+const expenseForPeriodGet = period =>
+  axios.get(`/transactions/expense/${period}`);
+
 const transactionDelete = transactionId =>
-  axios.delete(`/transaction/${transactionId}`);
-const incomeCategoriesGet = () => axios.get('/transaction/income-categories');
-const expenseCategoriesGet = () => axios.get('/transaction/expense-categories');
+  axios.delete(`/transactions/${transactionId}`);
+
+const incomeCategoriesGet = () => axios.get('/categories/income');
+const expenseCategoriesGet = () => axios.get('/categories/expense');
+
 const periodDataGet = date =>
   axios.get(`/transaction/period-data?date=${date}`);
 
@@ -43,12 +50,15 @@ export default {
   signUp,
   logIn,
   logOut,
-  refreshToken,
-  googleAuth,
-  incomePost,
+  transactionPost,
+  // refreshToken,
+  // googleAuth,
+  // incomePost,
   incomeGet,
-  expensePost,
+  // expensePost,
   expenseGet,
+  incomeForPeriodGet,
+  expenseForPeriodGet,
   transactionDelete,
   incomeCategoriesGet,
   expenseCategoriesGet,

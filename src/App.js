@@ -1,4 +1,4 @@
-import React, { Suspense, lazy,useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, useLocation } from 'react-router-dom';
 import { useBreakpoint } from 'react-use-size';
@@ -29,32 +29,43 @@ const StatisticsView = lazy(() =>
 );
 
 export default function App() {
-
-
   const userEmail = useSelector(authSelectors.getUserEmail);
   const token = useSelector(authSelectors.getToken);
   const dispatch = useDispatch();
   const location = useLocation();
 
   const width = useBreakpoint(768);
-   
-  
-  let x = location.pathname === '/authorization';
-  let y = x ? 'main-top-auth' : 'main-top';
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(token);
-    if(token){
+    if (token) api.token.set(token)
+  }, [token])
+
+//   useEffect(() => {
+//     // При логинизации через Google в момент маунта App (componentDidMount) в адресной строке есть токен пользователя.
+//     // 1. Вытаскиваем токен пользователя из адресной строки и записываем его в переменную googleUserToken.
+//     const googleUserToken = new URLSearchParams(location.search).get(
+//       'accessToken',
+//     );
+
+//     // 2. Если googleUserToken есть, то записываем его в наш Redux Store в свойсво token.
+//     googleUserToken && dispatch(authActions.setGoogleToken(googleUserToken));
+
+//     // 3. Если токен есть, а почты пользователя (user.email) нет, то делаем запрос на бекенд на получение текущего пользователя.
+//     // Проверка на токен и почту нужна, что б не делать лишние запросы на бекенд уже после логина пользователя.
+//     if (token && !userEmail) {
+//       dispatch(authOperations.getCurrentUser());
+//     }
+//   },[token])
+
+
+  let x = location.pathname === '/authorization';
+  let y = x ? 'main-bg-auth' : 'main-bg';
       
-    api.token.set(token)  
-    }
-  },[token])
-
-
   return (
     <>
-    <Header/>
-      <div className="main-bg-auth">
+      <Header />
+      <div className={y}>
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <PublicRoute path={routes.auth} restricted redirectTo={routes.home}>

@@ -5,7 +5,7 @@ const handleIncomePost = data => dispatch => {
   dispatch(actions.incomePostRequest());
 
   api
-    .incomePost(data)
+    .transactionPost(data)
     .then(({ data }) => dispatch(actions.incomePostSuccess(data)))
     .catch(error => dispatch(actions.incomePostError(error.message)));
 };
@@ -23,7 +23,7 @@ const handleExpensePost = data => dispatch => {
   dispatch(actions.expensePostRequest());
 
   api
-    .expensePost(data)
+    .transactionPost(data)
     .then(({ data }) => dispatch(actions.expensePostSuccess(data)))
     .catch(error => dispatch(actions.expensePostError(error.message)));
 };

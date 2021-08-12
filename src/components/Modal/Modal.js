@@ -5,8 +5,6 @@ import s from './Modal.module.scss';
 const Modal = ({ children }) => {
   const [showModal, setShowModal] = useState(true);
 
-  console.log(showModal);
-
   function closeModal(e) {
     if (e.target === e.currentTarget) {
       setShowModal(false);
