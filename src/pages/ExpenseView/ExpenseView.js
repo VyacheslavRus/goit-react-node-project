@@ -28,20 +28,7 @@ export default function ExpenseView() {
     dispatch(categoriesOperations.handleExpenseCategGet());
   }, [dispatch]);
 
-  // componentDidUpdate
-  useEffect(() => {
-    if (costList) return;
-
-    dispatch(transactionsOperations.handleExpenseGet());
-  }, [dispatch, costList]);
-
-  useEffect(() => {
-    if (category) return;
-
-    dispatch(categoriesOperations.handleExpenseCategGet());
-  }, [dispatch, category]);
-
-  const subminExpenseData = data => {
+  const submitData = data => {
     dispatch(transactionsOperations.handleExpensePost(data));
   };
 
@@ -56,10 +43,7 @@ export default function ExpenseView() {
         )}
 
         <TransactionContainer>
-          <BalanceForm
-            category={category}
-            subminExpenseData={subminExpenseData}
-          />
+          <BalanceForm category={category} submitData={submitData} />
           <div className={style.wrapper}>
             {width > 767 && (
               <TransactionTable
