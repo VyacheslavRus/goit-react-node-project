@@ -8,10 +8,10 @@ const initialState = [];
 
 const incomes = createReducer(initialState, {
   [actions.incomeGetSuccess]: (_, { payload }) => payload,
-  [actions.incomePostSuccess]: (state, { payload }) => ({
+  [actions.incomePostSuccess]: (state, { payload }) => [
     ...state,
-    incomes: [...state.incomes, payload.transaction],
-  }),
+    payload.transaction,
+  ],
   [actionDelete.transactionIncomeDeleteSuccess]: (state, { payload }) => ({
     ...state,
     incomes: state.incomes.filter(item => item._id !== payload.id),
@@ -21,10 +21,10 @@ const incomes = createReducer(initialState, {
 
 const expenses = createReducer(initialState, {
   [actions.expenseGetSuccess]: (_, { payload }) => payload,
-  [actions.expensePostSuccess]: (state, { payload }) => ({
+  [actions.expensePostSuccess]: (state, { payload }) => [
     ...state,
-    expenses: [...state.expenses, payload.transaction],
-  }),
+    payload.transaction,
+  ],
   [actionDelete.transactionExpenceDeleteSuccess]: (state, { payload }) => ({
     ...state,
     expenses: state.expenses.filter(item => item._id !== payload.id),
