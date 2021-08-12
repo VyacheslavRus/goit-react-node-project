@@ -15,13 +15,11 @@ const Balance = () => {
   const [inputValue, setValue] = useState('');
   const location = useLocation();
   const { width } = useWindowSize();
-  console.log('curent balance: ', currentBalance);
 
   useEffect(() => {
     newBalance > 0 ? setRead(true) : setRead(false);
     return newBalance !== undefined ? setCurrentBalance(newBalance) : null;
   }, [newBalance]);
-  console.log('new balance: ', newBalance);
 
   const dispatch = useDispatch();
   const balanceHandler = ({ target }) => {
@@ -54,7 +52,7 @@ const Balance = () => {
           placeholder={currentBalance > 0 ? currentBalance : '00.00 UAH'}
           value={currentBalance > 0 ? currentBalance : inputValue}
         />
-        {location.pathname === '/statistics' && width < 767 ? null : (
+        {location.pathname === '/statistics' ? null : (
           <button type="submit" className={style.balanceButton}>
             ПОДТВЕРДИТЬ
           </button>

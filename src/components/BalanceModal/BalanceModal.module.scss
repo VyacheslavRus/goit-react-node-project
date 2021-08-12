@@ -37,15 +37,14 @@
 
 @include for-size(tablet) {
   .container {
-    display: none;
+    left: 223px;
+    top: 58px;
+    z-index: 2;
   }
 }
 
 @include for-size(desktop) {
   .container {
-    display: block;
-    z-index: 2;
-    top: 58px;
-    left: 344px;
+    left: 422px;
   }
 }

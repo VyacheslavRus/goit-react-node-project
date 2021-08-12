@@ -10,7 +10,7 @@ import storage from 'redux-persist/lib/storage';
 const userInitialState = {};
 const user = createReducer(userInitialState, {
   [authActions.logInSuccess]: (_, { payload }) => ({
-    mail: payload.email,
+    email: payload.email,
     type: payload.type,
     balance: payload.balance,
   }),
@@ -72,10 +72,10 @@ const userPersistConfig = {
   key: 'user',
   storage,
   whitelist: ['email'],
-}
+};
 
 export default combineReducers({
-  user: persistReducer( userPersistConfig, user),
+  user: persistReducer(userPersistConfig, user),
   isAuthenticated,
   token,
 });
