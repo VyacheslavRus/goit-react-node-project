@@ -10,7 +10,7 @@ import storage from 'redux-persist/lib/storage';
 const userInitialState = {};
 const user = createReducer(userInitialState, {
   [authActions.logInSuccess]: (_, { payload }) => ({
-    email: payload.email,
+    mail: payload.email,
     type: payload.type,
     balance: payload.balance,
   }),

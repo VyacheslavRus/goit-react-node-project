@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+// import { createSelector } from 'reselect';
 
 export const getUserEmail = state => state.auth.user.email;
 export const getIsAuthenticated = state => state.auth.isAuthenticated;

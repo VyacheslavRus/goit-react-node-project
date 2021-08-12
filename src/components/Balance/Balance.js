@@ -15,11 +15,13 @@ const Balance = () => {
   const [inputValue, setValue] = useState('');
   const location = useLocation();
   const { width } = useWindowSize();
+  console.log('curent balance: ', currentBalance);
 
   useEffect(() => {
     newBalance > 0 ? setRead(true) : setRead(false);
     return newBalance !== undefined ? setCurrentBalance(newBalance) : null;
   }, [newBalance]);
+  console.log('new balance: ', newBalance);
 
   const dispatch = useDispatch();
   const balanceHandler = ({ target }) => {
@@ -28,7 +30,7 @@ const Balance = () => {
   };
   const balanceSubmit = e => {
     e.preventDefault();
-    dispatch(addBalance({ newBalance: inputValue }));
+    dispatch(addBalance({ balance: inputValue }));
     setRead(true);
   };
   return (

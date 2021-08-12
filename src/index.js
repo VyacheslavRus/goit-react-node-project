@@ -10,7 +10,7 @@ import './styles/reset.css';
 import './styles/_shared.scss';
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <Provider store={store.store}>
       <PersistGate loading={null} persistor={store.persistor}>
         <BrowserRouter>
@@ -18,6 +18,6 @@ ReactDOM.render(
         </BrowserRouter>
       </PersistGate>
     </Provider>,
-  // </React.StrictMode>,
+  </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -8,8 +8,8 @@ import TransactionTable from '../../components/TransactionTable/TransactionTable
 import transactionsOperations from '../../redux/operations/transactionsOperations';
 import categoriesOperations from '../../redux/operations/categoriesOperations';
 import BalanceForm from '../../components/BalanceForm/BalanceForm';
-// import BalanceCustom from '../../components/BalanceCustom/BalanceCustom';
-// import GoToReport from '../../components/GoToReport/GoToReport';
+import Balance from '../../components/Balance/Balance';
+import GoToReport from '../../components/GoToReport/GoToReport';
 import { getCategoryIncome } from '../../redux/selectors/categoriesSelectors';
 import operation from '../../redux/selectors/transactionsSelectors';
 import { handleDeleteIncome } from '../../redux/operations/transactionsDeleteOperations';
@@ -41,8 +41,8 @@ export default function IncomeView() {
       <Container>
         {width > 767 && (
           <div className={style.balanceWrap}>
-            {/* <BalanceCustom /> */}
-            {/* <GoToReport /> */}
+            <Balance />
+            <GoToReport />
           </div>
         )}
 
