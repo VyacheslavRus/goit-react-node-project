@@ -4,6 +4,8 @@ import authActions from '../actions/authActions';
 import balanceActions from '../actions/balanceActions';
 import transactionsActions from '../actions/transactionsActions';
 import actionDelete from '../actions/transactionDeleteActions';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const userInitialState = {};
 const user = createReducer(userInitialState, {
@@ -66,8 +68,14 @@ const isAuthenticated = createReducer(false, {
   [actionDelete.transactionExpenceDeleteError]: () => false,
 });
 
+const userPersistConfig = {
+  key: 'user',
+  storage,
+  whitelist: ['email'],
+}
+
 export default combineReducers({
-  user,
+  user: persistReducer( userPersistConfig, user),
   isAuthenticated,
   token,
 });

@@ -12,6 +12,7 @@ const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['token', 'isAuthenticated'],
+  
 };
 
 export default combineReducers({
