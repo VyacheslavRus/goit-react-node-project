@@ -25,8 +25,12 @@ const transactionPost = credentials => axios.post('/transactions', credentials);
 // const incomePost = data => axios.post('/transaction/income', data);
 // const expensePost = data => axios.post('/transaction/expense', data);
 
-const incomeGet = period => axios.get(`/transactions/income/${period}`);
-const expenseGet = period => axios.get(`/transactions/expense/${period}`);
+const incomeGet = () => axios.get(`/transactions/income`);
+const expenseGet = () => axios.get(`/transactions/expense`);
+const incomeForPeriodGet = period =>
+  axios.get(`/transactions/income/${period}`);
+const expenseForPeriodGet = period =>
+  axios.get(`/transactions/expense/${period}`);
 
 const transactionDelete = transactionId =>
   axios.delete(`/transactions/${transactionId}`);
@@ -53,6 +57,8 @@ export default {
   incomeGet,
   // expensePost,
   expenseGet,
+  incomeForPeriodGet,
+  expenseForPeriodGet,
   transactionDelete,
   incomeCategoriesGet,
   expenseCategoriesGet,

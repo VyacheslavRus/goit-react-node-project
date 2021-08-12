@@ -22,18 +22,9 @@ export default function ExpenseView() {
   const costList = useSelector(selectors.getExpenseTransaction);
   const category = useSelector(getCategoryExpense);
 
-  const getPeriod = () => {
-    const today = new Date(Date.now());
-    let month = today.getMonth() + 1;
-    month = month < 10 ? `0${month}` : `${month}`;
-    const year = today.getFullYear();
-    const period = `${month}.${year}`;
-    return period;
-  };
-
   // componenentDidMount
   useEffect(() => {
-    dispatch(transactionsOperations.handleExpenseGet(getPeriod()));
+    dispatch(transactionsOperations.handleExpenseGet());
     dispatch(categoriesOperations.handleExpenseCategGet());
   }, [dispatch]);
 
@@ -41,7 +32,7 @@ export default function ExpenseView() {
   useEffect(() => {
     if (costList) return;
 
-    dispatch(transactionsOperations.handleExpenseGet(getPeriod()));
+    dispatch(transactionsOperations.handleExpenseGet());
   }, [dispatch, costList]);
 
   useEffect(() => {
@@ -50,7 +41,7 @@ export default function ExpenseView() {
     dispatch(categoriesOperations.handleExpenseCategGet());
   }, [dispatch, category]);
 
-  const submitIncomeData = data => {
+  const subminExpenseData = data => {
     dispatch(transactionsOperations.handleExpensePost(data));
   };
 
@@ -67,7 +58,7 @@ export default function ExpenseView() {
         <TransactionContainer>
           <BalanceForm
             category={category}
-            submitIncomeData={submitIncomeData}
+            subminExpenseData={subminExpenseData}
           />
           <div className={style.wrapper}>
             {width > 767 && (

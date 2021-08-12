@@ -28,11 +28,11 @@ const handleExpensePost = data => dispatch => {
     .catch(error => dispatch(actions.expensePostError(error.message)));
 };
 
-const handleExpenseGet = period => dispatch => {
+const handleExpenseGet = () => dispatch => {
   dispatch(actions.expenseGetRequest());
 
   api
-    .expenseGet(period)
+    .expenseGet()
     .then(({ data }) => dispatch(actions.expenseGetSuccess(data)))
     .catch(error => dispatch(actions.expenseGetError(error.message)));
 };
