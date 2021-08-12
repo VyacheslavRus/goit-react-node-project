@@ -10,6 +10,7 @@ const user = createReducer(userInitialState, {
   [authActions.logInSuccess]: (_, { payload }) => ({
     email: payload.email,
     type: payload.type,
+    balance: payload.balance,
   }),
   [authActions.logOutSuccess]: () => userInitialState,
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload,

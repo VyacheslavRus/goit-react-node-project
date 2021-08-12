@@ -17,19 +17,13 @@ export default function TransactionTable({ costList, fnRemove, styleOption }) {
   };
 
   // --------------------------------------------------> Сортировка списка:
-  let costListNew = [];
+  let costListNew = null;
   if (costList) {
-    const copyList = [...costList];
-    const copyListSort = copyList.sort((item1, item2) => {
-      if (item1.date < item2.date) {
-        return 1;
-      }
-      if (item1.date > item2.date) {
-        return -1;
-      }
-      return 0;
+    costListNew = [...costList].sort((prevTrans, nextTrans) => {
+      const a = new Date(prevTrans.date.split('.').reverse().join('-'));
+      const b = new Date(nextTrans.date.split('.').reverse().join('-'));
+      return b - a;
     });
-    costListNew = copyListSort;
   }
 
   return (
