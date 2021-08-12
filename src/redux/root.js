@@ -11,8 +11,7 @@ import activeCategoryReducer from './reducers/activeCategoryReducer';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token', 'isAuthenticated'],
-  
+  whitelist: ['token', 'isAuthenticated', 'user'],
 };
 
 export default combineReducers({
@@ -22,5 +21,5 @@ export default combineReducers({
   periodData: periodDataReducer,
   error,
   isLoading: loadingReducer,
-  activeCategory:activeCategoryReducer,
+  activeCategory: activeCategoryReducer,
 });

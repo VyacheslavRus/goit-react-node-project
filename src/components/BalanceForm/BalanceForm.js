@@ -11,7 +11,7 @@ import variables from './variables';
 import 'react-calendar/dist/Calendar.css';
 import { withRouter } from 'react-router-dom';
 
-const BalanceForm = ({ category, subminExpenseData, size, match }) => {
+const BalanceForm = ({ category, submitData, size, match }) => {
   const options = category.map(el => ({
     value: el,
     label: `${el[0].toUpperCase() + el.slice(1)}`,
@@ -75,7 +75,7 @@ const BalanceForm = ({ category, subminExpenseData, size, match }) => {
       category: form.category.toLowerCase(),
     };
 
-    subminExpenseData(correctForm);
+    submitData(correctForm);
     clearForm();
   };
 
@@ -180,7 +180,7 @@ const BalanceForm = ({ category, subminExpenseData, size, match }) => {
 
 BalanceForm.propTypes = {
   category: PropTypes.array.isRequired,
-  subminExpenseData: PropTypes.func.isRequired,
+  submitData: PropTypes.func.isRequired,
   size: PropTypes.object.isRequired,
 };
 

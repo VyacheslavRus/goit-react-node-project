@@ -4,8 +4,6 @@ import authActions from '../actions/authActions';
 import balanceActions from '../actions/balanceActions';
 import transactionsActions from '../actions/transactionsActions';
 import actionDelete from '../actions/transactionDeleteActions';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 
 const userInitialState = {};
 const user = createReducer(userInitialState, {
@@ -18,33 +16,31 @@ const user = createReducer(userInitialState, {
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload,
   [balanceActions.addBalanceSuccess]: (state, { payload }) => ({
     ...state,
-    balance: payload,
+    balance: payload.balance,
   }),
   [transactionsActions.incomePostSuccess]: (state, { payload }) => ({
     ...state,
-    balance: payload.newBalance,
-    transactions: [...state.transactions, payload.transaction],
+    balance: state.balance + payload.transaction.sum,
   }),
   [transactionsActions.expensePostSuccess]: (state, { payload }) => ({
     ...state,
-    balance: payload.newBalance,
-    transactions: [...state.transactions, payload.transaction],
+    balance: state.balance - payload.transaction.sum,
   }),
-  [actionDelete.transactionDeleteSuccess]: (state, { payload }) => ({
-    ...state,
-    balance: payload.balance,
-    transactions: state.transactions.filter(item => item._id !== payload.id),
-  }),
-  [actionDelete.transactionIncomeDeleteSuccess]: (state, { payload }) => ({
-    ...state,
-    balance: payload.balance,
-    transactions: state.transactions.filter(item => item._id !== payload.id),
-  }),
-  [actionDelete.transactionExpenceDeleteSuccess]: (state, { payload }) => ({
-    ...state,
-    balance: payload.balance,
-    transactions: state.transactions.filter(item => item._id !== payload.id),
-  }),
+  // [actionDelete.transactionDeleteSuccess]: (state, { payload }) => ({
+  //   ...state,
+  //   balance: payload.balance,
+  //   transactions: state.transactions.filter(item => item._id !== payload.id),
+  // }),
+  // [actionDelete.transactionIncomeDeleteSuccess]: (state, { payload }) => ({
+  //   ...state,
+  //   balance: payload.balance,
+  //   transactions: state.transactions.filter(item => item._id !== payload.id),
+  // }),
+  // [actionDelete.transactionExpenceDeleteSuccess]: (state, { payload }) => ({
+  //   ...state,
+  //   balance: payload.balance,
+  //   transactions: state.transactions.filter(item => item._id !== payload.id),
+  // }),
 });
 
 const tokenInitialState = null;
@@ -68,14 +64,8 @@ const isAuthenticated = createReducer(false, {
   [actionDelete.transactionExpenceDeleteError]: () => false,
 });
 
-const userPersistConfig = {
-  key: 'user',
-  storage,
-  whitelist: ['email'],
-};
-
 export default combineReducers({
-  user: persistReducer(userPersistConfig, user),
+  user,
   isAuthenticated,
   token,
 });
