@@ -9,7 +9,7 @@ import transactionsOperations from '../../redux/operations/transactionsOperation
 import categoriesOperations from '../../redux/operations/categoriesOperations';
 import BalanceForm from '../../components/BalanceForm/BalanceForm';
 import Balance from '../../components/Balance/Balance';
-// import GoToReport from '../../components/GoToReport/GoToReport';
+import Reports from '../../components/Reports/Reports';
 import { getCategoryIncome } from '../../redux/selectors/categoriesSelectors';
 import operation from '../../redux/selectors/transactionsSelectors';
 import { handleDeleteIncome } from '../../redux/operations/transactionsDeleteOperations';
@@ -22,18 +22,14 @@ export default function IncomeView() {
   const costList = useSelector(operation.getIncomeTransaction);
   const category = useSelector(getCategoryIncome);
 
-  // useEffect(() => {
-  //   if (costList && category) {
-  //     return;
-  //   }
+  // componenentDidMount
+  useEffect(() => {
+    dispatch(transactionsOperations.handleIncomeGet());
+    dispatch(categoriesOperations.handleIncomeCategGet());
+  }, [dispatch]);
 
-  //   dispatch(transactionsOperations.handleIncomeGet());
-  //   dispatch(categoriesOperations.handleIncomeCategGet());
-  // }, [dispatch]);
-
-  const submitIncomeData = data => {
-    const finalData = { ...data, amount: Number(data.amount) };
-    dispatch(transactionsOperations.handleIncomePost(finalData));
+  const submitData = data => {
+    dispatch(transactionsOperations.handleIncomePost(data));
   };
 
   return (
@@ -42,15 +38,12 @@ export default function IncomeView() {
         {width > 767 && (
           <div className={style.balanceWrap}>
             <Balance />
-            {/* <GoToReport /> */}
+            <Reports />
           </div>
         )}
 
         <TransactionContainer>
-          <BalanceForm
-            category={category}
-            submitIncomeData={submitIncomeData}
-          />
+          <BalanceForm category={category} submitData={submitData} />
           <div className={style.wrapper}>
             {width > 767 && (
               <TransactionTable
