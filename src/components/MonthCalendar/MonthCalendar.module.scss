@@ -10,9 +10,10 @@
   }
   @include for-size(tablet) {
     margin-bottom: 15px;
+    margin-left: 50px;
   }
   @include for-size(desktop) {
-    margin-left: 220px;
+    margin-left: 270px;
   }
 }
 .currentPeriod {

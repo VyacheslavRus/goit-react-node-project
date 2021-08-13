@@ -7,7 +7,6 @@ import { getActiveCategory } from '../../../redux/selectors/activeCategorySelect
 import categoryActions from '../../../redux/actions/activeCategoryActions';
 
 const ReportIncome = () => {
-  // const [activeCategory, setActiveCategory] = useState('');
   const activeCategory = useSelector(getActiveCategory);
   const dispatch = useDispatch();
   const setActiveCategory = activeCategory =>
@@ -44,7 +43,7 @@ const ReportIncome = () => {
     if (allCategoriesArray.length > 0) {
       setActiveCategory(allCategoriesArray[0][0]);
     }
-  }, [categoryTotalIncomes]);
+  }, []);
 
   return (
     <>

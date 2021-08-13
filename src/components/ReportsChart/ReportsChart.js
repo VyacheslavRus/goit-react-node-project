@@ -15,7 +15,6 @@ import { getDataForDiagram } from '../../redux/selectors/periodDataSelectors';
 import styles from './ReportsChart.module.scss';
 
 const ReportsChart = () => {
-
     const [isMobile, setIsMobile] = useState(false);
     const diagramData = useSelector(getDataForDiagram);
 
@@ -58,8 +57,6 @@ const ReportsChart = () => {
                         ) : (
                             <YAxis type="number" axisLine={false} tick={true} />
                         )}
-                        {/* <XAxis type="number" />
-        <YAxis type="category" dataKey="name" /> */}
 
                         {!isMobile && (
                             <CartesianGrid vertical={false} strokeDashArray="7 5 2" />
@@ -73,7 +70,6 @@ const ReportsChart = () => {
                             }
                             dataKey="data"
                             fill="#FF751D"
-                            // shape={<TriangleBar />}
                             label={{ position: 'top', fill: '#52555F' }}
                         >
                             {diagramData.map((entry, index) => (

@@ -12,9 +12,10 @@
   }
   @include for-size(tablet) {
     flex-direction: row;
+    margin-left: auto;
   }
   @include for-size(desktop) {
-    margin-left: 150px;
+    margin-left: 255px;
   }
 }
 
