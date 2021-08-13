@@ -5,7 +5,7 @@ import BtnBack from '../../components/BtnBack/BtnBack';
 import Container from '../../components/Container';
 import FinanceTotal from '../../components/FinanceTotal/FinanceTotal';
 import MonthCalendar from '../../components/MonthCalendar/MonthCalendar';
-import ReportsBalance from '../../components/ReportsBalance.js/ReportsBalance';
+import ReportsChart from '../../components/ReportsChart/ReportsChart';
 import ReportsExInSwitch from '../../components/ReportsExInSwitch/ReportsExInSwitch';
 import style from './StatiscticsView.module.scss';
 
@@ -30,6 +30,13 @@ const StatisticsView = () => {
         <div className={style.wrapper}>
           {periodData.expenses && <ReportsExInSwitch />}
         </div>
+
+
+
+        <div className={style.wrapper}>
+          <ReportsChart />
+        </div>
+
       </Container>
     </main>
   );

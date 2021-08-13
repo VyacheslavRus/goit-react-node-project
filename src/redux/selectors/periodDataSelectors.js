@@ -11,7 +11,7 @@ export const getDataForDiagram = createSelector(
       ? periodData.incomes.incomesData[category]
       : periodData?.expenses?.expensesData[category];
     if (categoryData) {
-      const categoryDataKeys = Object.keys(categoryData).slice(1);
+      const categoryDataKeys = Object.keys(categoryData).filter(el => el !== 'total');
       const formatedCategoryData = categoryDataKeys.map(category => ({
         name: category,
         data: categoryData[category],

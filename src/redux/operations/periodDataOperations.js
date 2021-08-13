@@ -1,15 +1,12 @@
 import api from '../../services/kapusta-api';
 import actions from '../actions/periodDataActions';
 
-const getPeriodData = date => async dispatch => {
+const getPeriodDataOperation = date => async dispatch => {
   dispatch(actions.periodDataGetRequest());
-  // console.log('gggggg');
 
   try {
     const respExp = await api.expenseForPeriodGet(date);
     const respInc = await api.incomeForPeriodGet(date);
-    // console.log('respDataExpense', respExp.data);
-    console.log('respDataIncome', respInc.data);
 
     const objCatExp = {};
 
@@ -35,8 +32,6 @@ const getPeriodData = date => async dispatch => {
       objCatInc[element.category] += element.sum;
     });
 
-    // console.log('Объект с суммами категорий', objCat);
-
     const intialState = {
       incomes: {
         total: Object.values(objCatInc).reduce((acc, el) => acc + el, 0),
@@ -45,17 +40,10 @@ const getPeriodData = date => async dispatch => {
             if (ell.category === elll.category) {
               acc[elll.description] = elll.sum;
             }
-            return { ...acc, total: objCatInc[ell.category] };
+            return { total: objCatInc[ell.category], ...acc };
           }, {});
           return acc;
         }, {}),
-        // {
-        //     'З/П': {
-        //       total: 12000,
-        //       Аванс: 5000,
-        //       Основная: 7000,
-        //     },
-        // },
       },
       expenses: {
         total: Object.values(objCatExp).reduce((acc, el) => acc + el, 0),
@@ -65,13 +53,12 @@ const getPeriodData = date => async dispatch => {
             if (ell.category === elll.category) {
               acc[elll.description] = elll.sum;
             }
-            return { ...acc, total: objCatExp[ell.category] };
+            return { total: objCatExp[ell.category], ...acc };
           }, {});
           return acc;
         }, {}),
       },
     };
-    console.log(intialState);
 
     dispatch(actions.periodDataGetSuccess(intialState));
   } catch (error) {
@@ -79,17 +66,5 @@ const getPeriodData = date => async dispatch => {
   }
 };
 
-// const getPeriodDataIncome = date => async dispatch => {
-//   dispatch(actions.periodDataGetRequest());
-//   //   console.log(resp);
-//   try {
-//     const resp = await api.incomeForPeriodGet(date);
-//     console.log(resp.data);
-//     dispatch(actions.periodDataIncome(resp.data));
-//   } catch (error) {
-//     dispatch(actions.periodDataGetError());
-//   }
-// };
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { getPeriodData };
+export default getPeriodDataOperation;

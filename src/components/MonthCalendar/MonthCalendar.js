@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styles from './MonthCalendar.module.scss';
 import sprite from '../../img/sprite.svg';
-import operations from '../../redux/operations/periodDataOperations';
 import dataPeriodActions from '../../redux/actions/periodDataActions';
-// import {
-//   getIncomeTotal,
-//   getExpenseTotal,
-// } from '../../redux/selectors/periodDataSelectors';
+import getPeriodDataOperation from '../../redux/operations/periodDataOperations';
+
 
 const MonthCalendar = () => {
   const [date, setDate] = useState(new Date());
   const dispatch = useDispatch();
 
-  // const incomeTotal = useSelector(getIncomeTotal);
-  // const expenseTotal = useSelector(getExpenseTotal);
-
   useEffect(() => {
-    dispatch(operations.getPeriodData(formatDate(date)));
+    dispatch(getPeriodDataOperation(formatDate(date)));
     return () => dispatch(dataPeriodActions.periodDataClear());
   }, [dispatch, date]);
 
@@ -30,13 +24,13 @@ const MonthCalendar = () => {
   const setNextMonth = () => {
     referenceDate.setMonth(referenceDate.getMonth() + 1);
     setDate(new Date(referenceDate));
-    dispatch(operations.getPeriodData(formatDate(date)));
+    dispatch(getPeriodDataOperation(formatDate(date)));
   };
 
   const setPrevMonth = () => {
     referenceDate.setMonth(referenceDate.getMonth() - 1);
     setDate(new Date(referenceDate));
-    dispatch(operations.getPeriodData(formatDate(date)));
+    dispatch(getPeriodDataOperation(formatDate(date)));
   };
 
   function formatDate(date) {
