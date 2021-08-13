@@ -55,12 +55,12 @@ export default function TransactionTable({ costList, fnRemove, styleOption }) {
                 if (item.type === 'income') {
                   return (
                     <CostItem
-                      key={item._id}
+                      key={item.id}
                       desc={item.description}
                       amount={item.sum}
                       date={item.date}
                       category={item.category}
-                      id={item._id}
+                      id={item.id}
                       fnRemove={fnRemove}
                       styleOption={false}
                     ></CostItem>
@@ -68,12 +68,12 @@ export default function TransactionTable({ costList, fnRemove, styleOption }) {
                 } else {
                   return (
                     <CostItem
-                      key={item._id}
+                      key={item.id}
                       desc={item.description}
                       amount={item.sum}
                       date={item.date}
                       category={item.category}
-                      id={item._id}
+                      id={item.id}
                       fnRemove={fnRemove}
                       styleOption={true}
                     ></CostItem>
@@ -96,12 +96,12 @@ export default function TransactionTable({ costList, fnRemove, styleOption }) {
           {costListNew
             ? costListNew.map(item => (
                 <CostItem
-                  key={item._id}
+                  key={item.id}
                   desc={item.description}
                   amount={item.sum}
                   date={item.date}
                   category={item.category}
-                  id={item._id}
+                  id={item.id}
                   fnRemove={fnRemove}
                   styleOption={styleOption}
                 ></CostItem>

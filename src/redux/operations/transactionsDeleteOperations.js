@@ -6,14 +6,7 @@ const handleDelete = id => dispatch => {
 
   api
     .transactionDelete(id)
-    .then(({ data }) => {
-      dispatch(
-        actions.transactionDeleteSuccess({
-          id: id,
-          balance: data.newBalance,
-        }),
-      );
-    })
+    .then(({ data }) => dispatch(actions.transactionDeleteSuccess(data)))
     .catch(error => dispatch(actions.transactionDeleteError(error.message)));
 };
 
@@ -22,14 +15,7 @@ const handleDeleteIncome = id => dispatch => {
 
   api
     .transactionDelete(id)
-    .then(({ data }) => {
-      dispatch(
-        actions.transactionIncomeDeleteSuccess({
-          id: id,
-          balance: data.newBalance,
-        }),
-      );
-    })
+    .then(({ data }) => dispatch(actions.transactionIncomeDeleteSuccess(data)))
     .catch(error =>
       dispatch(actions.transactionIncomeDeleteError(error.message)),
     );
@@ -40,15 +26,7 @@ const handleDeleteExpence = id => dispatch => {
 
   api
     .transactionDelete(id)
-    .then(({ data }) => {
-
-      dispatch(
-        actions.transactionExpenceDeleteSuccess({
-          id: id,
-          balance: data.newBalance,
-        }),
-      );
-    })
+    .then(({ data }) => dispatch(actions.transactionExpenceDeleteSuccess(data)))
     .catch(error =>
       dispatch(actions.transactionExpenceDeleteError(error.message)),
     );

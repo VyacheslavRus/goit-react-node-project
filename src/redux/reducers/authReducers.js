@@ -31,16 +31,14 @@ const user = createReducer(userInitialState, {
   //   balance: payload.balance,
   //   transactions: state.transactions.filter(item => item._id !== payload.id),
   // }),
-  // [actionDelete.transactionIncomeDeleteSuccess]: (state, { payload }) => ({
-  //   ...state,
-  //   balance: payload.balance,
-  //   transactions: state.transactions.filter(item => item._id !== payload.id),
-  // }),
-  // [actionDelete.transactionExpenceDeleteSuccess]: (state, { payload }) => ({
-  //   ...state,
-  //   balance: payload.balance,
-  //   transactions: state.transactions.filter(item => item._id !== payload.id),
-  // }),
+  [actionDelete.transactionIncomeDeleteSuccess]: (state, { payload }) => ({
+    ...state,
+    balance: state.balance - payload.transaction.sum,
+  }),
+  [actionDelete.transactionExpenceDeleteSuccess]: (state, { payload }) => ({
+    ...state,
+    balance: state.balance + payload.transaction.sum,
+  }),
 });
 
 const tokenInitialState = null;
