@@ -5,8 +5,8 @@ import styles from './AuthorizationForm.module.scss';
 // Operations
 import authOperations from '../../redux/operations/authOperations';
 // Others
-import sprite from '../../img/sprite.svg';
-import axios from 'axios'; // импортировал, что б брать baseURL
+// import sprite from '../../img/sprite.svg';
+// import axios from 'axios'; // импортировал, что б брать baseURL
 
 const AuthorizationForm = () => {
   const [email, setEmail] = useState('');
@@ -36,7 +36,7 @@ const AuthorizationForm = () => {
 
     if (validateEmail(email) && validatePassword(password)) {
       dispatch(authOperations.handleLogIn({ email, password }));
-      formReset();
+      // formReset();
     }
   };
 
@@ -54,13 +54,14 @@ const AuthorizationForm = () => {
 
     if (validateEmail(email) && validatePassword(password)) {
       dispatch(authOperations.handleSignUp({ email, password }));
-      formReset();
+      // formReset();
     }
   };
 
   const validateEmail = email => {
     // eslint-disable-next-line
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   };
 
@@ -68,23 +69,25 @@ const AuthorizationForm = () => {
     return Boolean(password.length >= 4 && password.length <= 16);
   };
 
-  const formReset = () => {
-    setEmail('');
-    setPassword('');
-  };
+  // const formReset = () => {
+  //   setEmail('');
+  //   setPassword('');
+  // };
 
   const errorMessage = () => {
-    if (error === 'Request failed with status code 409') {
-      return 'Пользователь с таким email уже зарегистрирован';
-    } else if (error === 'Request failed with status code 403') {
+    if (error === 'Request failed with status code 404') {
+      return 'Пользователь с таким email еще не зарегистрирован';
+    } else if (error === 'Request failed with status code 401') {
       return 'Некорректный пароль или email';
+    } else if (error === 'Request failed with status code 409') {
+      return 'Пользователь с таким email уже зарегистрирован';
     }
   };
 
   return (
     <>
       <form className={styles.AuthorizationForm} onSubmit={onSubmit}>
-        <div className={styles.googleAuthBlock}>
+        {/* <div className={styles.googleAuthBlock}>
           <p className={styles.googleAuthText}>
             Вы можете авторизоваться с помощью Google Account:
           </p>
@@ -97,12 +100,12 @@ const AuthorizationForm = () => {
             </svg>
             Google
           </a>
-        </div>
+        </div> */}
         <div className={styles.authBlock}>
-          <p className={styles.authText}>
+          {/* <p className={styles.authText}>
             Или зайти с помощью e-mail и пароля, предварительно
             зарегистрировавшись:
-          </p>
+          </p> */}
           <div className={styles.emailBlock}>
             <label htmlFor="AuthorizationForm__email">
               {emailError && <span style={{ color: 'red' }}>*</span>}

@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { /*useDispatch,*/ useSelector } from 'react-redux';
 import { Switch, useLocation } from 'react-router-dom';
-import { useBreakpoint } from 'react-use-size';
+// import { useBreakpoint } from 'react-use-size';
 import Header from './components/Header/Header';
 import { routes, PublicRoute, PrivateRoute } from './routes';
 import * as authSelectors from './redux/selectors/authSelectors';
@@ -30,12 +30,12 @@ const StatisticsView = lazy(() =>
 );
 
 export default function App() {
-  const userEmail = useSelector(authSelectors.getUserEmail);
+  // const userEmail = useSelector(authSelectors.getUserEmail);
   const token = useSelector(authSelectors.getToken);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const location = useLocation();
 
-  const width = useBreakpoint(768);
+  // const width = useBreakpoint(768);
 
   useEffect(() => {
     console.log(token);
