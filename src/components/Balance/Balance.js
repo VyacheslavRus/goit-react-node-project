@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useWindowSize } from 'react-use-size';
 import { useLocation } from 'react-router';
 
 import style from './Balance.module.scss';
@@ -14,7 +13,6 @@ const Balance = () => {
   const [read, setRead] = useState(false);
   const [inputValue, setValue] = useState('');
   const location = useLocation();
-  const { width } = useWindowSize();
 
   useEffect(() => {
     newBalance > 0 ? setRead(true) : setRead(false);
@@ -43,7 +41,7 @@ const Balance = () => {
           id="balance"
           onChange={balanceHandler}
           className={
-            location.pathname === '/statistics' && width < 767
+            location.pathname === '/statistics'
               ? style.input
               : style.balanceInput
           }
@@ -52,11 +50,11 @@ const Balance = () => {
           placeholder={currentBalance > 0 ? currentBalance : '00.00 UAH'}
           value={currentBalance > 0 ? currentBalance : inputValue}
         />
-        {location.pathname === '/statistics' ? null : (
+        {currentBalance === 0 && location.pathname !== '/statistics' ? (
           <button type="submit" className={style.balanceButton}>
             ПОДТВЕРДИТЬ
           </button>
-        )}
+        ) : null}
         {currentBalance === 0 && location.pathname !== '/statistics' ? (
           <BalanceModal />
         ) : null}
