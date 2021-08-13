@@ -4,35 +4,38 @@
 .table {
   width: 230px;
 
-  border-collapse: collapse;
-  border-radius: 20px 20px 20px 0px;
-  overflow: hidden;
+  background-color: #f5f6fb;
+
+    // border-collapse: collapse;
+    border-radius: 20px 20px 20px 0px;
+    overflow: hidden;
 
   @include for-size(tablet-only) {
-    margin-top: 40px;
+    margin-top: 90px;
+    position: absolute;
   }
 }
 
-.tableHeader {
-  font-weight: 700;
-}
+// .tableHeader {
+//   font-weight: 700;
+// }
 
-.table th {
-  height: 38px;
-  background-color:  #F5F6FB;
-;
+// .table th {
+//   height: 38px;
+//   background-color:  #F5F6FB;
+// ;
 
-  border-bottom: 2px solid white;
-}
-th {
-  font-weight: 400;
-}
-.month {
-  text-transform: uppercase;
-  text-align: left;
-  padding-left: 22px;
-}
-.sum {
-  padding-right: 20px;
-  text-align: center;
-}
+//   border-bottom: 2px solid white;
+// }
+// th {
+//   font-weight: 400;
+// }
+// .month {
+//   text-transform: uppercase;
+//   text-align: left;
+//   padding-left: 22px;
+// }
+// .sum {
+//   padding-right: 20px;
+//   text-align: center;
+// }
