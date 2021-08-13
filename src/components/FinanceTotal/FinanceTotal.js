@@ -1,3 +1,8 @@
+import { useSelector } from 'react-redux';
+import {
+  getExpenseTotal,
+  getIncomeTotal,
+} from '../../redux/selectors/periodDataSelectors';
 import styles from './FinanceTotal.module.scss';
 
 Number.prototype.format = function (n, x, s, c) {
@@ -11,8 +16,8 @@ Number.prototype.format = function (n, x, s, c) {
 };
 
 const FinanceTotal = () => {
-  const expenseTotal = 1000;
-  const incomeTotal = 10000;
+  const expenseTotal = useSelector(getExpenseTotal);
+  const incomeTotal = useSelector(getIncomeTotal);
 
   const valueIncomeTotal = incomeTotal?.format(2, 3, ' ', '.');
 

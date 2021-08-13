@@ -19,7 +19,6 @@ const StatisticsView = () => {
           <BtnBack />
           <div className={style.balanceWrap}>
             <Balance />
-            <ReportsBalance />
             <MonthCalendar />
           </div>
         </div>

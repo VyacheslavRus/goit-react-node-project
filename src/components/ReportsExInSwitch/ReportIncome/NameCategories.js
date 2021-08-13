@@ -1,4 +1,4 @@
 export default [
-  { name: 'icon-envelope', category: 'З/П' },
-  { name: 'icon-credit-card', category: 'Доп. доход' },
+  { name: 'icon-envelope', category: 'зп' },
+  { name: 'icon-credit-card', category: 'доп. доход' },
 ];

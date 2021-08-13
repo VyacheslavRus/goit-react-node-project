@@ -25,11 +25,13 @@ const ReportExpense = () => {
     state => state.periodData.expenses.expensesData,
   );
 
+  console.log(categoryTotalExpenses);
+
   let allCategoriesArray = [];
 
   if (categoryTotalExpenses !== undefined) {
     const categoryArr = Object.entries(categoryTotalExpenses);
-
+    console.log(categoryArr);
     categoryArr.forEach(category => {
       if (category[1].total > 0) {
         NameCategories.forEach(item => {
@@ -40,7 +42,7 @@ const ReportExpense = () => {
       }
     });
   }
-
+  console.log('allCat', allCategoriesArray);
   useEffect(() => {
     if (allCategoriesArray.length > 0) {
       setActiveCategory(allCategoriesArray[0][0]);

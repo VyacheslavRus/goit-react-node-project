@@ -4,22 +4,20 @@ import styles from './MonthCalendar.module.scss';
 import sprite from '../../img/sprite.svg';
 import operations from '../../redux/operations/periodDataOperations';
 import dataPeriodActions from '../../redux/actions/periodDataActions';
-import {
-  getIncomeTotal,
-  getExpenseTotal,
-} from '../../redux/selectors/periodDataSelectors';
+// import {
+//   getIncomeTotal,
+//   getExpenseTotal,
+// } from '../../redux/selectors/periodDataSelectors';
 
 const MonthCalendar = () => {
-  const [date, setDate] = useState(new Date(Date.now()));
-  console.log(date);
+  const [date, setDate] = useState(new Date());
   const dispatch = useDispatch();
 
   // const incomeTotal = useSelector(getIncomeTotal);
   // const expenseTotal = useSelector(getExpenseTotal);
 
   useEffect(() => {
-    dispatch(operations.getPeriodDataExpense('08.2021'));
-    dispatch(operations.getPeriodDataIncome('08.2021'));
+    dispatch(operations.getPeriodData(formatDate(date)));
     return () => dispatch(dataPeriodActions.periodDataClear());
   }, [dispatch, date]);
 
@@ -32,13 +30,13 @@ const MonthCalendar = () => {
   const setNextMonth = () => {
     referenceDate.setMonth(referenceDate.getMonth() + 1);
     setDate(new Date(referenceDate));
-    // dispatch(operations.getPeriodData(formatDate(date)));
+    dispatch(operations.getPeriodData(formatDate(date)));
   };
 
   const setPrevMonth = () => {
     referenceDate.setMonth(referenceDate.getMonth() - 1);
     setDate(new Date(referenceDate));
-    // dispatch(operations.getPeriodData(formatDate(date)));
+    dispatch(operations.getPeriodData(formatDate(date)));
   };
 
   function formatDate(date) {
@@ -49,7 +47,7 @@ const MonthCalendar = () => {
 
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
-    let result = [year, month].join('-');
+    let result = [month, year].join('.');
     return result;
   }
 
