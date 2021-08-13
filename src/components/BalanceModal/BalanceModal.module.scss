@@ -37,7 +37,7 @@
 
 @include for-size(tablet) {
   .container {
-    left: 223px;
+    left: 145px;
     top: 58px;
     z-index: 2;
   }
@@ -45,6 +45,6 @@
 
 @include for-size(desktop) {
   .container {
-    left: 422px;
+    left: 340px;
   }
 }
