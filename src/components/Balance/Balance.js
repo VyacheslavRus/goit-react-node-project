@@ -41,7 +41,7 @@ const Balance = () => {
           id="balance"
           onChange={balanceHandler}
           className={
-            location.pathname === '/statistics'
+            currentBalance !== 0 || location.pathname === '/statistics'
               ? style.input
               : style.balanceInput
           }
