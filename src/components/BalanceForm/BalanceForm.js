@@ -14,18 +14,20 @@ import { useSelector } from 'react-redux';
 import { getUserBalance } from '../../redux/selectors/authSelectors';
 
 const BalanceForm = ({ category, submitData, size, match }) => {
+  const [date, setDate] = useState('');
+  const [value, setValue] = useState(null);
+  const [error, setError] = useState('');
+
   const balance = useSelector(getUserBalance);
+  const type = match.path.slice(1);
 
   const options = category.map(el => ({
     value: el,
     label: `${el[0].toUpperCase() + el.slice(1)}`,
   }));
 
-  const [date, setDate] = useState('');
-  const [value, setValue] = useState(null);
-
   const initialForm = {
-    type: match.path.slice(1),
+    type,
     description: '',
     sum: '',
     date: date,
@@ -67,10 +69,12 @@ const BalanceForm = ({ category, submitData, size, match }) => {
   const clearForm = () => {
     setForm({ ...initialForm });
     setValue(null);
+    setError('');
   };
 
   const handleSubmitForm = e => {
     e.preventDefault();
+    setError('');
 
     const correctForm = {
       ...form,
@@ -79,10 +83,13 @@ const BalanceForm = ({ category, submitData, size, match }) => {
       category: form.category.toLowerCase(),
     };
 
-    if (correctForm.sum <= balance) {
-      submitData(correctForm);
-      clearForm();
+    if (type === 'expense' && correctForm.sum > balance) {
+      setError('Сумма расхода превышает текущий баланс');
+      return;
     }
+
+    submitData(correctForm);
+    clearForm();
   };
 
   return (
@@ -176,6 +183,7 @@ const BalanceForm = ({ category, submitData, size, match }) => {
           </button>
         </div>
       </form>
+      <div className={style.error}>{error ? error : null}</div>
     </>
   );
 };
