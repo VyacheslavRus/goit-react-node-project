@@ -14,6 +14,8 @@ import { getCategoryExpense } from '../../redux/selectors/categoriesSelectors';
 import selectors from '../../redux/selectors/transactionsSelectors';
 import { handleDeleteExpence } from '../../redux/operations/transactionsDeleteOperations';
 import style from './ExpenseView.module.scss';
+import summarySelectors from '../../redux/selectors/summarySelectors';
+import summaryOperations from '../../redux/operations/summaryOperations';
 
 export default function ExpenseView() {
   const dispatch = useDispatch();
@@ -21,11 +23,13 @@ export default function ExpenseView() {
 
   const costList = useSelector(selectors.getExpenseTransaction);
   const category = useSelector(getCategoryExpense);
+  const summary = useSelector(summarySelectors.getExpenseSummary);
 
   // componenentDidMount
   useEffect(() => {
     dispatch(transactionsOperations.handleExpenseGet());
     dispatch(categoriesOperations.handleExpenseCategGet());
+    dispatch(summaryOperations.handleSummaryGetExpense(new Date().getFullYear()));
   }, [dispatch]);
 
   const submitData = data => {
@@ -45,14 +49,8 @@ export default function ExpenseView() {
         <TransactionContainer>
           <BalanceForm category={category} submitData={submitData} />
           <div className={style.wrapper}>
-            {width > 767 && (
-              <TransactionTable
-                costList={costList}
-                fnRemove={handleDeleteExpence}
-                styleOption={true}
-              />
-            )}
-            {width > 767 && <Summary />}
+            {width > 767 && <TransactionTable costList={costList} fnRemove={handleDeleteExpence} styleOption={true} />}
+            {width > 767 && <Summary summary={summary} />}
           </div>
         </TransactionContainer>
       </Container>
