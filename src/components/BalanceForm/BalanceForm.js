@@ -10,8 +10,12 @@ import Select from './Select/Select';
 import variables from './variables';
 import 'react-calendar/dist/Calendar.css';
 import { withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getUserBalance } from '../../redux/selectors/authSelectors';
 
 const BalanceForm = ({ category, submitData, size, match }) => {
+  const balance = useSelector(getUserBalance);
+
   const options = category.map(el => ({
     value: el,
     label: `${el[0].toUpperCase() + el.slice(1)}`,
@@ -75,8 +79,10 @@ const BalanceForm = ({ category, submitData, size, match }) => {
       category: form.category.toLowerCase(),
     };
 
-    submitData(correctForm);
-    clearForm();
+    if (correctForm.sum <= balance) {
+      submitData(correctForm);
+      clearForm();
+    }
   };
 
   return (
@@ -165,11 +171,7 @@ const BalanceForm = ({ category, submitData, size, match }) => {
           <button type="submit" className={style.buttonSubmit}>
             Ввод
           </button>
-          <button
-            onClick={clearForm}
-            type="button"
-            className={style.buttonClear}
-          >
+          <button onClick={clearForm} type="button" className={style.buttonClear}>
             Очистить
           </button>
         </div>
