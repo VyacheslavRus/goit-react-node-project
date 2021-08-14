@@ -4,12 +4,15 @@
 .table {
   width: 230px;
 
+  background-color: #f5f6fb;
+
   border-collapse: collapse;
   border-radius: 20px 20px 20px 0px;
   overflow: hidden;
 
   @include for-size(tablet-only) {
-    margin-top: 40px;
+    margin-top: 90px;
+    position: absolute;
   }
 }
 
@@ -19,8 +22,7 @@
 
 .table th {
   height: 38px;
-  background-color:  #F5F6FB;
-;
+  background-color: #f5f6fb;
 
   border-bottom: 2px solid white;
 }

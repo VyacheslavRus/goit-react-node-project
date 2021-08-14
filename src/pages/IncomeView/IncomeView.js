@@ -4,7 +4,7 @@ import { useWindowSize } from 'react-use-size';
 import Container from '../../components/Container';
 import TransactionContainer from '../../components/TransactionContainer/TransactionContainer';
 import TransactionTable from '../../components/TransactionTable/TransactionTable';
-// import Summary from '../../components/Summary/Summary';
+import Summary from '../../components/Summary/Summary';
 import transactionsOperations from '../../redux/operations/transactionsOperations';
 import categoriesOperations from '../../redux/operations/categoriesOperations';
 import BalanceForm from '../../components/BalanceForm/BalanceForm';
@@ -14,6 +14,8 @@ import { getCategoryIncome } from '../../redux/selectors/categoriesSelectors';
 import operation from '../../redux/selectors/transactionsSelectors';
 import { handleDeleteIncome } from '../../redux/operations/transactionsDeleteOperations';
 import style from './IncomeView.module.scss';
+import summarySelectors from '../../redux/selectors/summarySelectors';
+import summaryOperations from '../../redux/operations/summaryOperations';
 
 export default function IncomeView() {
   const dispatch = useDispatch();
@@ -21,11 +23,13 @@ export default function IncomeView() {
 
   const costList = useSelector(operation.getIncomeTransaction);
   const category = useSelector(getCategoryIncome);
+  const summary = useSelector(summarySelectors.getIncomeSummary);
 
   // componenentDidMount
   useEffect(() => {
     dispatch(transactionsOperations.handleIncomeGet());
     dispatch(categoriesOperations.handleIncomeCategGet());
+    dispatch(summaryOperations.handleSummaryGetIncome(new Date().getFullYear()));
   }, [dispatch]);
 
   const submitData = data => {
@@ -45,14 +49,8 @@ export default function IncomeView() {
         <TransactionContainer>
           <BalanceForm category={category} submitData={submitData} />
           <div className={style.wrapper}>
-            {width > 767 && (
-              <TransactionTable
-                costList={costList}
-                fnRemove={handleDeleteIncome}
-                styleOption={false}
-              />
-            )}
-            {/* {width > 767 && <Summary />} */}
+            {width > 767 && <TransactionTable costList={costList} fnRemove={handleDeleteIncome} styleOption={false} />}
+            {width > 767 && <Summary summary={summary} />}
           </div>
         </TransactionContainer>
       </Container>

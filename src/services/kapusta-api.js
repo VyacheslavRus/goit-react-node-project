@@ -17,31 +17,24 @@ const token = {
 const signUp = credentials => axios.post('/auth/signup', credentials);
 const logIn = credentials => axios.post('/auth/signin', credentials);
 const logOut = () => axios.post('/auth/signout');
-// const refreshToken = sid => axios.post('/auth/refresh', sid);
-// const googleAuth = () => axios.get('/auth/google');
 
 /* TRANSACTIONS */
 const transactionPost = credentials => axios.post('/transactions', credentials);
-// const incomePost = data => axios.post('/transaction/income', data);
-// const expensePost = data => axios.post('/transaction/expense', data);
 
 const incomeGet = () => axios.get(`/transactions/income`);
 const expenseGet = () => axios.get(`/transactions/expense`);
 
-const expenseForPeriodGet = period =>
-  axios.get(`/transactions/expense/${period}`);
+const expenseForPeriodGet = period => axios.get(`/transactions/expense/${period}`);
 
-const incomeForPeriodGet = period =>
-  axios.get(`/transactions/income/${period}`);
+const incomeForPeriodGet = period => axios.get(`/transactions/income/${period}`);
 
-const transactionDelete = transactionId =>
-  axios.delete(`/transactions/${transactionId}`);
+const transactionDelete = transactionId => axios.delete(`/transactions/${transactionId}`);
 
 const incomeCategoriesGet = () => axios.get('/categories/income');
 const expenseCategoriesGet = () => axios.get('/categories/expense');
 
-// const periodDataGet = date =>
-//   axios.get(`/transaction/period-data?date=${date}`);
+const summaryGetExpense = year => axios.get(`/transactions/summary/expense/${year}`);
+const summaryGetIncome = year => axios.get(`/transactions/summary/income/${year}`);
 
 /* USER */
 const balancePost = balance => axios.post('/user/balance', balance);
@@ -65,6 +58,8 @@ export default {
   incomeCategoriesGet,
   expenseCategoriesGet,
   // periodDataGet,
+  summaryGetExpense,
+  summaryGetIncome,
   balancePost,
   userDataGet,
 };
