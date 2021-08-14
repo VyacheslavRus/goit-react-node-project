@@ -4,6 +4,7 @@ import authActions from '../actions/authActions';
 import balanceActions from '../actions/balanceActions';
 import transactionsActions from '../actions/transactionsActions';
 import actionDelete from '../actions/transactionDeleteActions';
+import summaryActions from '../actions/summaryActions';
 
 const userInitialState = {};
 const user = createReducer(userInitialState, {
@@ -60,6 +61,7 @@ const isAuthenticated = createReducer(false, {
   [actionDelete.transactionDeleteError]: () => false,
   [actionDelete.transactionIncomeDeleteError]: () => false,
   [actionDelete.transactionExpenceDeleteError]: () => false,
+  [summaryActions.summaryGetError]: () => false,
 });
 
 export default combineReducers({
