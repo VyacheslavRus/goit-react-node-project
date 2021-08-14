@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './Summary.module.scss';
 
 const Summary = ({ summary }) => {
