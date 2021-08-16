@@ -5,9 +5,9 @@ export const addBalance = balance => dispatch => {
   dispatch(actions.addBalanceRequest());
 
   api
-    .balancePatch(balance)
+    .balancePost(balance)
     .then(({ data }) => {
-      dispatch(actions.addBalanceSuccess(data.newBalance));
+      dispatch(actions.addBalanceSuccess(data));
     })
     .catch(error => dispatch(actions.addBalanceError(error.message)));
 };

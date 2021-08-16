@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store from './redux/store';
 import App from './App';
+import 'modern-normalize/modern-normalize.css';
 import './styles/reset.css';
 import './styles/_shared.scss';
 
@@ -16,7 +17,7 @@ ReactDOM.render(
           <App />
         </BrowserRouter>
       </PersistGate>
-    </Provider>
+    </Provider>,
   </React.StrictMode>,
   document.getElementById('root'),
 );
