@@ -11,6 +11,7 @@ import { handleDelete } from '../../redux/operations/transactionsDeleteOperation
 import style from './HomeView.module.scss';
 import routes from '../../routes/routes';
 import Balance from '../../components/Balance/Balance';
+import Reports from '../../components/Reports/Reports'
 
 const HomeView = () => {
   const costList = useSelector(operation.getAllransactions);
@@ -22,7 +23,7 @@ const HomeView = () => {
         <Container>
           <div className={style.balanceWrap}>
             <Balance />
-            {/* <Reports /> */}
+            <Reports />
           </div>
           <TransactionContainer>
             <TransactionTable costList={costList} fnRemove={handleDelete} />
